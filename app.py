@@ -5,7 +5,7 @@ Version: 1.0
 Author: ZhangHongYu
 Date: 2020-11-02 09:24:31
 LastEditors: ZhangHongYu
-LastEditTime: 2020-11-07 12:32:35
+LastEditTime: 2020-11-07 17:43:59
 '''
 from flask import Flask, render_template, request, redirect, url_for, flash
 from werkzeug.utils import secure_filename
@@ -19,9 +19,9 @@ importlib.reload(sys)
 app = Flask(__name__)
 
 # 全局变量
-username = "lonelyprince7"
+username = ""
 # TODO: username变量的赋值  方法1：全局变量实现，随登录进行修改  方法2：给每个页面传递username
-userRole = "CUSTOMER"
+userRole = ""
 notFinishedNum = 0
 # 上传文件要储存的目录
 UPLOAD_FOLDER = '/static/images/'
