@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>管理员界面</title>
+	<link rel="stylesheet" href="static/css/OrderPage.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="static/js/modernizr-2.6.2.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/icomoon.css') }}">
+	<!-- Themify Icons-->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/themify-icons.css') }}">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}">
+	<!-- Bootstrap DateTimePicker -->
+	<link rel="stylesheet" href="static/css/bootstrap-datetimepicker.min.css">
+	<!-- Owl Carousel  -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
+	<style>
+		@font-face {
+			font-family: 'iconfont';  /* project id 1548416 */
+			src: url('//at.alicdn.com/t/font_1548416_0wf6swchkdhr.eot');
+			src: url('//at.alicdn.com/t/font_1548416_0wf6swchkdhr.eot?#iefix') format('embedded-opentype'),
+			url('//at.alicdn.com/t/font_1548416_0wf6swchkdhr.woff2') format('woff2'),
+			url('//at.alicdn.com/t/font_1548416_0wf6swchkdhr.woff') format('woff'),
+			url('//at.alicdn.com/t/font_1548416_0wf6swchkdhr.ttf') format('truetype'),
+			url('//at.alicdn.com/t/font_1548416_0wf6swchkdhr.svg#iconfont') format('svg');
+		}
+		.iconfont{
+			font-family:"iconfont" !important;
+			font-size:16px;font-style:normal;
+			-webkit-font-smoothing: antialiased;
+			-webkit-text-stroke-width: 0.2px;
+			-moz-osx-font-smoothing: grayscale;
+		}
+	</style>
+
+</head>
+
+<body>
+	<div class="navbkg" >
+    <nav class="gtco-nav" role="navigation" style="background-color: rgba(0, 0, 0, 0.8);">
+        <div class="gtco-container">
+            <div class="row">
+                <div class="col-sm-4 col-xs-12">
+                    <div id="gtco-logo"><a href="adminCommentList">评价列表 <em>.</em></a></div>
+                </div>
+                <div class="col-xs-8 text-right menu-1">
+                    <ul>
+                        <li><a href="adminRestList">商家列表</a></li>
+						<li><a href="index">退出登录</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+	</nav>
+	</div>
+
+	<div class="gtco-section">
+		<div class="gtco-container">
+			<!-- 文字 -->
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
+					<p style="font-size: 40px; color: #FBB448; font-family: Helvetica;">评价</p>
+					<!-- <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p> -->
+				</div>
+			</div>
+			<div class="selectcondition" style="position:relative;">
+				<form action="{{ url_for('adminCommentPage') }}" method="post">
+					<input type="submit" name="action" value="按评分升序排列" style="color: white; font-size: 16px; outline:none; border:0px; background-color: #FBB448; border-radius: 10px;">
+				</form>
+			</div>
+			<br/><br/>
+			<!-- 展示我的全部订单 -->
+			<div class="row">
+				{% if messages == "done" %}
+					{% for item in result %}
+					<div class="col-lg-6 col-md-6 col-sm-6">
+						<!-- <div class="fh5co-card-item"> -->
+						<div class="fh5co-card-item">
+							<figure class="col-lg-12" style="float: left; position: relative;">
+								<div class="overlay"></div>
+								<img src={{item[8]}} alt="Image" class="img-responsive">
+							</figure>
+							<div class="fh5co-text" style="float: left ;padding: 20px; text-align: left;">
+								<!-- <h2 style="margin-top: 40px;">  </h2> -->
+								<h3 class="cursive-font primary-color">{{ item[1] }}</h3>
+								<p>订单号：{{ item[0] }}</p>
+								<p>菜品：{{ item[2] }}</p>
+								<h4 class="cursive-font primary-color">￥{{ item[13]}}</h4>
+								<p style="font-size: 18px;">
+									<!-- var score = {{ item[11] }}	 -->
+									{% if item[11] == 5 %}
+									评分：<i class="iconfont" style="color: yellow;">&#xf0d5;&#xf0d5;&#xf0d5;&#xf0d5;&#xf0d5;</i> {{ item[11] }}
+									{% elif item[11] == 4 %}
+									评分：<i class="iconfont" style="color: yellow;">&#xf0d5;&#xf0d5;&#xf0d5;&#xf0d5;</i><i class="iconfont" style="color: rgb(155, 155, 139);">&#xf0d5;</i> {{ item[11] }}
+									{% elif item[11] == 3 %}
+									评分：<i class="iconfont" style="color: yellow;">&#xf0d5;&#xf0d5;&#xf0d5;</i><i class="iconfont" style="color: rgb(155, 155, 139);">&#xf0d5;&#xf0d5;</i> {{ item[11] }}
+									{% elif item[11] == 2 %}
+									评分：<i class="iconfont" style="color: yellow;">&#xf0d5;&#xf0d5;</i><i class="iconfont" style="color: rgb(155, 155, 139);">&#xf0d5;&#xf0d5;&#xf0d5;</i> {{ item[11] }}
+									{% elif item[11] == 1 %}
+									评分：<i class="iconfont" style="color: yellow;">&#xf0d5;</i><i class="iconfont" style="color: rgb(155, 155, 139);">&#xf0d5;&#xf0d5;&#xf0d5;&#xf0d5;</i> {{ item[11] }}
+									{% elif item[11] == 0 %}
+									评分：<i class="iconfont" style="color: yellow;"></i><i class="iconfont" style="color: rgb(155, 155, 139);">&#xf0d5;&#xf0d5;&#xf0d5;&#xf0d5;&#xf0d5;</i> {{ item[11] }}
+									{% endif %}
+								</p>
+									<p style="font-size: 18px; width: 500px;">评价：{{ item[10] }}</p>
+							</div>
+
+							<!-- <div class="fh5co-text" style="padding: 20px; float: left; margin-left: 100px;">
+								<i class="ti-quote-left" style="font-size: 20px;"></i>
+							</div> -->
+							<!-- <div class="fh5co-text" style="padding: 20px; float: left; text-align: left;">
+								
+							</div> -->
+							<!-- <div class="fh5co-text" style="padding: 20px; float: right; margin-right: 20px;">
+								<i class="ti-quote-right" style="font-size: 20px;"></i>
+							</div> -->
+						</div>
+					</div>
+					{% endfor %}
+
+				{% elif messages == "none" %}
+					<!-- <p style="text-align: center;"><strong style="font-size: 18px;">您还没有订单哦！</strong></p> -->
+					<div class="alert alert-danger" role="alert">暂无评价！</div>
+				{% endif %}
+				
+			</div>
+		</div>
+	</div>
+	<div>
+	</div>
+
+
+    	<!-- jQuery -->
+	<script src="static/js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="static/js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="static/js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="static/js/jquery.waypoints.min.js"></script>
+	<!-- Carousel -->
+	<script src="static/js/owl.carousel.min.js"></script>
+	<!-- countTo -->
+	<script src="static/js/jquery.countTo.js"></script>
+
+	<!-- Stellar Parallax -->
+	<script src="static/js/jquery.stellar.min.js"></script>
+
+	<!-- Magnific Popup -->
+	<script src="static/js/jquery.magnific-popup.min.js"></script>
+	<script src="static/js/magnific-popup-options.js"></script>
+
+	<script src="static/js/moment.min.js"></script>
+	<script src="static/js/bootstrap-datetimepicker.min.js"></script>
+
+
+	<!-- Main -->
+	<script src="static/js/main.js"></script>
+</body>
+</html>

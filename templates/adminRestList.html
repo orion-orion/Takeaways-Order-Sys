@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <title>管理员界面</title>
+    <!-- <link rel="stylesheet" href="static/css/test.css" type="text/css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/test.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/icomoon.css') }}">
+	<!-- Themify Icons-->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/themify-icons.css') }}">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}">
+
+	<!-- Bootstrap DateTimePicker -->
+	<link rel="stylesheet" href="static/css/bootstrap-datetimepicker.min.css">
+
+	<!-- Owl Carousel  -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	<script src="static/js/modernizr-2.6.2.min.js"></script>
+</head>
+<body>
+	<div class="gtco-loader"></div>
+
+	<div id="page">
+		<div class="navbkg" >
+			<nav class="gtco-nav" role="navigation" style="background-color: rgba(0, 0, 0, 0.8);">
+				<div class="gtco-container">
+					<div class="row">
+						<div class="col-sm-4 col-xs-12">
+							<div id="gtco-logo"><a href="adminRestList">商家列表<em></em></a></div>
+                		</div>
+						<div class="col-xs-8 text-right menu-1">
+							<ul>
+								<li><a href="adminCommentList">查看评论</a></li>
+								<li><a href="index">退出登录</a></li>
+                    		</ul>
+                		</div>
+            		</div>
+        		</div>
+			</nav>
+		</div>
+
+	<div class="gtco-section">
+		<div class="gtco-container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
+					<h2 class="cursive-font primary-color">Restaurant List</h2>
+					<p>查看评论后可移除恶意营销商家</p>
+				</div>
+			</div>
+			<div class="row">
+				{% if messages == "done" %}
+					{% for item in result %}
+						<div class="col-lg-6 col-md-6 col-sm-6">
+							<div class="fh5co-card-item">
+								<a href="{{ item[4] }}" class="fh5co-card-item image-popup">
+								<figure>
+									<div class="overlay"><i class="ti-plus"></i></div>
+									<img src="{{ item[4] }}" alt="Image" class="img-responsive">
+								</figure>
+								</a>
+								<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
+									<h2 class="cursive-font primary-color" style="font-weight: bold;">{{ item[0] }}</h2>
+									<h3 class="cursive-font primary-color">ADDRESS：{{ item[2] }}</h3>
+									<h3 class="cursive-font primary-color">PHONE：{{ item[3] }}</h3>
+								</div>
+								<form action="{{ url_for('adminRestListPage') }}" method="post">
+									<input name="RESTName" value="{{ item[0] }}" style="display: none;">
+									<input type="submit" name="action" value="移除" style="margin: 8px; font-size: 20px; float: right; color: #FBB448; background-color: white; font-size: 16px; outline:none; border: 1px solid #FBB448; border-radius: 10px;">
+								</form>
+							</div>
+						</div>
+						{% endfor %}
+				{% elif messages == "none" %}
+					<div class="alert alert-danger" role="alert">暂无商家</div>
+				{% elif messages == "delete" %}
+					<script>alert("移除成功！")</script>
+					<script type='text/javascript'>window.location.href='adminRestList'</script>
+				{% endif %}
+
+
+			</div>
+
+		</div>
+	</div>
+	</div>
+
+	<footer id="gtco-footer" role="contentinfo" style="background-image: url(static/images/img_bg_1.jpg)" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="gtco-container">
+			<div class="row row-pb-md">
+
+				<div class="col-md-12 text-center">
+					<div class="gtco-widget">
+						<h3>社区分享</h3>
+						<ul class="gtco-social-icons">
+							<li><a href="#"><i class="icon-twitter"></i></a></li>
+							<li><a href="#"><i class="icon-facebook"></i></a></li>
+							<li><a href="#"><i class="icon-linkedin"></i></a></li>
+							<li><a href="#"><i class="icon-dribbble"></i></a></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="col-md-12 text-center copyright">
+					<p><big class="block">&copy; 2020 数据库课程设计 天津大学.</big>
+				</div>
+
+			</div>
+
+		</div>
+	</footer>
+
+	<!-- jQuery -->
+	<script src="static/js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="static/js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="static/js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="static/js/jquery.waypoints.min.js"></script>
+	<!-- Carousel -->
+	<script src="static/js/owl.carousel.min.js"></script>
+	<!-- countTo -->
+	<script src="static/js/jquery.countTo.js"></script>
+
+	<!-- Stellar Parallax -->
+	<script src="static/js/jquery.stellar.min.js"></script>
+
+	<!-- Magnific Popup -->
+	<script src="static/js/jquery.magnific-popup.min.js"></script>
+	<script src="static/js/magnific-popup-options.js"></script>
+
+	<script src="static/js/moment.min.js"></script>
+	<script src="static/js/bootstrap-datetimepicker.min.js"></script>
+
+
+	<!-- Main -->
+	<script src="static/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+.fh5co-card-item .fh5co-text {
+    padding: 0px 10px 10px 20px;
+    text-align: center;
+    position: relative;
+    z-index: 22;
+  }
+  .fh5co-card-item .fh5co-text:before {
+    /* position: absolute;
+    top: -40px;
+    right: 0;
+    left: 0;
+    width: 103%;
+    margin-left: -4px;
+    height: 50px;
+    z-index: -1;
+    content: "";
+    background: #fff;
+    -webkit-transform: rotate(4deg);
+    -moz-transform: rotate(4deg);
+    -ms-transform: rotate(4deg);
+    -o-transform: rotate(4deg);
+    transform: rotate(4deg); */
+    text-align: center;
+  }
+  .gtco-container form input {
+    color: white; 
+    font-size: 16px; 
+    outline:none;
+    border:0px;
+    background-color: #FBB448;
+    border-radius: 10%;
+  }
+  .selectcondition {
+    float: left;
+  }

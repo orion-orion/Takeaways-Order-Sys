@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+.left
+{
+	float:left;
+    height:485px;
+    margin-left:200px
+}
+.right
+{
+	float:right;
+    height:485px;
+    margin-right:200px
+}
+</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心</title>
+    <link rel="stylesheet" href="static/css/personal.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="static/js/modernizr-2.6.2.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/icomoon.css') }}">
+	<!-- Themify Icons-->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/themify-icons.css') }}">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}">
+	<!-- Bootstrap DateTimePicker -->
+	<link rel="stylesheet" href="static/css/bootstrap-datetimepicker.min.css">
+	<!-- Owl Carousel  -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
+
+</head>
+<body>
+	<div class="navbkg" >
+    <nav class="gtco-nav" role="navigation" style="background-color: rgba(0, 0, 0, 0.8);">
+        <div class="gtco-container">
+            <div class="row">
+                <div class="col-sm-4 col-xs-12">
+                    <div id="gtco-logo"><a href="MerchantPersonal">个人中心 <em></em></a></div>
+                </div>
+                <div class="col-xs-8 text-right menu-1">
+                    <ul>
+                        <li class="has-dropdown">
+                            <a href="MerchantPersonal">个人中心</a>
+                            <ul class="dropdown">
+								<li><a href="MerchantModifyPerInfo">修改个人信息</a></li>
+								<li><a href="MerchantModifyPwd">修改密码</a></li>
+
+                            </ul>
+						</li>
+						<li><a href="MerchantIndex">返回首页</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+	</nav>
+	</div>
+
+	<div id="gtco-features">
+	<div class="gtco-container">
+	<div class="row" style="margin-top: 70px; background-color: #FBB448;">
+		<div class="left"  class="col-md-4 col-sm-6" >
+			<div  class="feature-center animate-box" data-animate-effect="fadeIn">
+				<span class="icon">
+					<i class="ti-settings"></i>
+				</span>
+				<a href="MerchantModifyPerInfo" style="text-decoration: none;"><h3>修改个人信息</h3></a>
+				<p>Modify personal information</p>
+			</div>
+		</div>
+		<div class="right" class="col-md-4 col-sm-6">
+			<div  class="feature-center animate-box" data-animate-effect="fadeIn">
+				<span class="icon">
+					<i class="ti-lock"></i>
+				</span>
+				<a href="MerchantModifyPwd" style="text-decoration: none;"><h3>修改密码</h3></a>
+				<p>Modify my password</p>
+			</div>
+		</div>
+
+	</div>
+	</div>
+	</div>
+
+    	<!-- jQuery -->
+	<script src="static/js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="static/js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="static/js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="static/js/jquery.waypoints.min.js"></script>
+	<!-- Carousel -->
+	<script src="static/js/owl.carousel.min.js"></script>
+	<!-- countTo -->
+	<script src="static/js/jquery.countTo.js"></script>
+
+	<!-- Stellar Parallax -->
+	<script src="static/js/jquery.stellar.min.js"></script>
+
+	<!-- Magnific Popup -->
+	<script src="static/js/jquery.magnific-popup.min.js"></script>
+	<script src="static/js/magnific-popup-options.js"></script>
+
+	<script src="static/js/moment.min.js"></script>
+	<script src="static/js/bootstrap-datetimepicker.min.js"></script>
+
+
+	<!-- Main -->
+	<script src="static/js/main.js"></script>
+</body>
+</html>

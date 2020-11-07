@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!--HTML4.01-->
+	<!-- <meta htt-equiv='Content-Type' content='text/html'  charset="UTF-8"> -->
+	<!--HTML5-->
+	<meta charset="UTF-8" />
+	<meta name='viewport' content="width=device-width,initial-scale=1,user-scalable=no" />
+	<title>我的购物车</title>
+	<link href="static/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div class='main'>
+		<div class="site-nav">
+			<div class="nav">
+				<ul class="nav-left">
+					<li><a class='nav-hangon'>购物车</a></li>
+				</ul>
+				<ul class="nav-right">
+
+
+					<li class='nav_sellCenter'>
+						<a href="personal" class='nav-sellCenter'>个人中心</a>
+						<ul class="nav-myTao-nav">
+							<li><a href="ModifyPersonalInfo">修改个人信息</a></li>
+							<li><a href="ModifyPassword">修改密码</a></li>
+							<li><a href="OrderPage">我的订单</a></li>
+							<li><a href="MyComments">我的评价</a></li>
+							<li><a href="WriteComments">发表评价</a></li>
+						</ul>
+					</li>
+					<li><a href="UserRestList" class='nav-index'>商家列表</a></li>
+					<li><a href="index" class='nav-index'>退出登录</a></li>
+
+				</ul>
+			</div>
+		</div>
+		<div class="container">
+			<div class="header">
+				<div class="header-search">
+					<input type="text" placeholder="请输入内容" class='header-search-input' autocomplete="off"><!--
+					--><button type='submit'>搜 索</button>
+					<div class="list">
+					</div>
+				</div>
+			</div>
+			<div class="content">
+				<div class="tbBar">
+					<ul class = 'switch-cart'>
+						<li class='btn-switch-cart switch-cart-0 selectColumn'>
+							<a href="#" class='btn-switch-href '>
+								<em>全部商品</em>
+								<span class='number'>7</span>
+								<span class='pipe'></span>
+							</a>
+						</li>
+					</ul>
+					<div class="cart-sum">
+						<span>已选商品（不含运费）</span>
+						<strong class='price'>￥<!--
+							--><span class='total-symbol'>0.00</span>
+						</strong>
+						<button onclick="confirm()" class="submit-btn btn-common">结算</button>
+					</div>
+					<div class="wrap-line">
+					</div>
+				</div>
+				<div class="tbMain">
+					<div class="commodityColumn">
+						<div class="th-chk">
+							<div id="selectAll" class="selectAll ">
+								<input type="checkbox" name="selectAllChckbox" id='selectAllChckbox' class='allSelected1' autocomplete="off">
+								<label for="selectAllChckbox">全选</label>
+							</div>
+						</div>
+						<div class="th-inner">
+							<div class="commodityMsg">
+								<div>商品信息</div>
+							</div>
+						</div>
+						<div class="th-space">
+							<div class="td-inner">&nbsp;</div>
+						</div>
+						<div class="th-price">
+							<div class="td-inner">单价</div>
+						</div>
+						<div class="th-amount">
+							<div class="td-inner">数量</div>
+						</div>
+						<div class="th-sum">
+							<div class="td-inner">金额</div>
+						</div>
+						<div class="th-operation">
+							<div class="td-inner">操作</div>
+						</div>
+					</div>
+					<div class='commodityContainer'>
+
+						{% if messages == "done" %}
+		                    {% for item in result %}
+							<div class="mainCommodity">
+								<div class="commodityInfo">
+									<ul>
+										<li class='td-chk'>
+											<div class="td-inner">
+												<input type="checkbox" name='checkbox' autocomplete="off" >
+											</div>
+										</li>
+										<li class='td-item'>
+											<div class="td-inner">
+												<a href="{{item[4]}}"  class='res'>
+												</a>
+												<div class="item-info">
+													<div class="item-basis-info">
+														<a>{{ item[2] }}</a>
+													</div>
+													<div class="item-other-info">
+														<div class="item-other-space"></div>
+														<div class="item-other-list">
+															<a href="#" title='支持信用卡支付'>
+																<div class="bandCard"></div>
+															</a>
+															<a href="#" title='消费者保障服务'>
+																<div class="guarantee"></div>
+															</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</li>
+										<li class='td-info'>
+											<div class="td-info-msg">
+												<p>店铺：{{ item[1] }}</p>
+											</div>
+										</li>
+										<li class='td-price'>
+											<div class="td-inner">
+												<p class='discount'>￥{{ item[3] }}</p>
+											</div>
+										</li>
+										<li class='td-amount'>
+											<div class="item-amount">
+												<a href="#" class='amount-left amount-color'>-</a>
+												<input type="text" name='amountNum' value='1' autocomplete="off">
+												<a href="#" class="amount-right">+</a>
+											</div>
+											<div class="stock">
+												574
+											</div>
+											<div class="outNum">
+												<span class="instr">最多只能购买</span>
+												<span class='stockNum'></span><!--
+												--><em>件</em>
+											</div>
+
+										</li>
+										<li class='td-sum'>
+											<em>￥</em><!--
+											--><span>{{ item[3] }}</span>
+										</li>
+										<li class='td-operation'>
+											<p><a href="#" class='delete'>删除</a></p>
+										</li>
+									</ul>
+								</div>
+							</div>
+						{% endfor %}
+						{% endif %}
+						<div class="mainCommodity">
+							<div class="commodityInfo">
+								<ul>
+									<li class='td-chk'>
+										<div class="td-inner">
+											<input type="checkbox" name='checkbox' autocomplete="off">
+										</div>
+									</li>
+									<li class='td-item'>
+										<div class="td-inner">
+											<div class="item-info">
+												<div class="item-basis-info">
+													<a href="#">
+														牛肉面
+													</a>
+												</div>
+												<div class="item-other-info">
+													<div class="item-other-space"></div>
+													<div class="item-other-list">
+														<a href="#" title='支持信用卡支付'>
+															<div class="bandCard"></div>
+														</a>
+														<a href="#" title='消费者保障服务'>
+															<div class="guarantee"></div>
+														</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li class='td-info'>
+										<div class="td-info-msg">
+											<p>店铺：统一面馆</p>
+										</div>
+									</li>
+									<li class='td-price'>
+										<div class="td-inner">
+											<p class='non-discount'>￥15.00</p>
+											<p class='discount'>￥<span>13.00</span></p>
+											<div class="promotion">
+												卖家促销
+												<i class='promotionIcon'></i>
+											</div>
+											<div class="proSlidedown">
+												<p class='newPro'>卖家促销：新品优惠</p>
+												<p>优惠：￥2.00</p>
+											</div>
+										</div>
+									</li>
+									<li class='td-amount'>
+										<div class="item-amount">
+											<a href="#" class='amount-left amount-color'>-</a>
+											<input type="text" name='amountNum' value='1' autocomplete="off">
+											<a href="#" class="amount-right">+</a>
+										</div>
+										<div class="stock">
+											915
+										</div>
+										<div class="outNum">
+											<span class="instr">最多只能购买</span>
+											<span class='stockNum'></span>
+											<em>件</em>
+										</div>
+		 							</li>
+									<li class='td-sum'>
+										<em>￥</em><span>13.00</span>
+									</li>
+									<li class='td-operation'>
+										<p><a href="#" class='delete'>删除</a></p>
+									</li>
+								</ul>
+							</div>
+						</div> 
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12" style="font-size: 14px; float: right;">
+				<label for="activities">选择就餐方式</label><span style="margin-left: 30px; font-size: 14px;"></span>
+				<input type="radio" name="mode" value="1" />堂食
+				<input type="radio" name="mode" value="0" />外卖
+				<br>
+			</div>
+			<div class="footer">
+				<div class="all-selected">
+					<input type="checkbox" name='all-selected' id='all-selected' class='allSelected2' autocomplete="off">
+					<label for="all-selected">全选</label>
+				</div>
+				<div class="operation">
+					<a href="#" class='delete'>删除</a>
+				</div>
+				<div class="float-bar-right">
+					<div class="amount-sum">
+						<span>已选商品</span>
+						<em class='totalSum'>0</em>
+						<span>件</span>
+					</div>
+					<div class="price-sum">
+						<span>合计（不含运费）：</span>
+						<span class='moneySym'>￥</span><!--
+						--><em class='total-sum'>0.00</em>
+					</div>
+					<div class="btn-area">
+						<!-- <a href="#" class='btn-common' id='btn-sum'>结 算</a> -->
+							<!-- <a onclick="confirm()" class="btn-common" id='btn-sum'>结  算</a> -->
+						<input type="submit" name="action" value="结算" class='btn-common' id='btn-sum' onclick="confirm()" style="border: none; width: 90px; height: 52px; color: white; font-size: 18px;">
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<script src='static/js/jquery-2.2.1.min.js'></script>
+	<script src='static/js/template.js'></script>
+	<script id='delete' type='text/html'>
+		<div class="undo-wrapper">
+			<div class="deleteCom">
+				<p>
+					成功删除
+					<em>1</em>
+					件宝贝，如果无，可
+					<a href="#" class='turnBack'>撤销本次删除</a>
+				</p>
+			</div>
+		</div>
+	</script>
+	<script>
+		function confirm() {
+			alert('提交订单成功!');
+		}
+	</script>
+	<script src='static/js/myOrder.js'></script>
+</body>
+</html>
