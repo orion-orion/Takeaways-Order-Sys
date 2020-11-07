@@ -4,11 +4,11 @@
  * @Author: ZhangHongYu
  * @Date: 2020-11-02 10:47:01
  * @LastEditors: ZhangHongYu
- * @LastEditTime: 2020-11-07 17:35:50
+ * @LastEditTime: 2020-11-07 20:05:33
 -->
 # Takeaways-Order-Sys
 
-> 本项目为SWPU数据库原理及应用大作业《西柚外卖订餐系统》，基于[Flask](https://github.com/pallets/flask)框架+MySQL数据库开发，轻量简洁。
+> 本项目为SWPU数据库原理及应用大作业，在线外卖订餐系统《西柚の外卖屋》， 基于[Flask](https://github.com/pallets/flask)框架+MySQL数据库开发，轻量简洁。
 
 #### 项目模块及功能介绍
 
