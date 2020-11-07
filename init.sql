@@ -31,20 +31,6 @@ INSERT INTO `RESTAURANT` VALUES
 	('统一面馆','88888888','四川省成都市新都区正熊猫大道69号','1884801','static/images/res_1.jpg');
 SELECT* FROM RESTAURANT;
 
-
-CREATE TABLE `SHOPPINGCART`(
-	`username` CHAR(15) PRIMARY KEY,
-    `restaurant` CHAR(15) NOT NULL,
-    `dishname` CHAR(15) NOT NULL,
-    `price` DECIMAL(5,2) NOT NULL,
-    `img_res` VARCHAR(50),
-	FOREIGN KEY (restaurant)
-    REFERENCES RESTAURANT(username)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-INSERT INTO `SHOPPINGCART` VALUES
-	('lonelyprince7','土风土味','水煮鱼',26.00,'static/images/img_2.jpg');
-SELECT* FROM SHOPPINGCART;
-
 CREATE TABLE `DISHES`(
 	`dishname` CHAR(15) PRIMARY KEY,
 	`restaurant` CHAR(15) NOT NULL,
@@ -62,6 +48,24 @@ INSERT INTO DISHES VALUES
     ('香锅牛肉', '土风土味', '该香锅牛肉味道鲜美，有土豆藕片等蔬菜可添加', '蛋白质，维生素', 14.50, 0, 'static/images/img_5.jpg', 1),
 	('牛肉面', '统一面馆', '老坛酸菜牛肉面，麻辣酸爽，美味享受', '蛋白质，淀粉，维生素', 13.00, 1, 'static/images/img_7.jpg', 0);
 SELECT* FROM DISHES;
+
+CREATE TABLE `SHOPPINGCART`(
+	`username` CHAR(15),
+    `restaurant` CHAR(15),
+    `dishname` CHAR(15),
+    `price` DECIMAL(5,2) NOT NULL,
+    `img_res` VARCHAR(50),
+	FOREIGN KEY (username)
+    REFERENCES CUSTOMER(username),
+	FOREIGN KEY (restaurant)
+    REFERENCES RESTAURANT(username),
+	FOREIGN KEY (dishname)
+    REFERENCES DISHES(dishname),
+    PRIMARY KEY (username,restaurant,dishname)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `SHOPPINGCART` VALUES
+	('lonelyprince7','土风土味','水煮鱼',26.00,'static/images/img_2.jpg');
+SELECT* FROM SHOPPINGCART;
 
 CREATE TABLE `ORDER_COMMENT`(
 	`orderID` CHAR(15) PRIMARY KEY,
