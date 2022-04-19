@@ -71,16 +71,20 @@ CREATE TABLE `ORDER_COMMENT`(
 	`orderID` CHAR(15) PRIMARY KEY,
 	`username` CHAR(15) NOT NULL,
 	`restaurant` VARCHAR(15) NOT NULL,
-    `isFinished` BOOLEAN CHECK('isFinshed'=1 or 'isFinshed'=0),
+    `isFinished` BOOLEAN,
+    CHECK(isFinished=1 or isFinished =0),
     `cost` DECIMAL(5,2) NOT NULL,
-	`c_rank` TINYINT(1) CHECK('c_rank' BETWEEN 1 AND 5),
+	`c_rank` TINYINT(1),
+    CHECK(c_rank BETWEEN 1 AND 5),
     `text` VARCHAR(50),
-    `transactiontime` TIMESTAMP(0) NOT NULL CHECK('transactiontime' BETWEEN '1970-01-01 00:00:01' AND '2038-01-19 03:14:07'),
+    `transactiontime` TIMESTAMP(0) NOT NULL,
+    CHECK(transactiontime BETWEEN '1970-01-01 00:00:01' AND '2038-01-19 03:14:07'),
     FOREIGN KEY (username)
     REFERENCES CUSTOMER(username),
 	FOREIGN KEY (restaurant)
     REFERENCES RESTAURANT(username)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 INSERT INTO ORDER_COMMENT VALUES
 	('1444000', 'lonelyprince7', '土风土味', 1, 26.00, 1, '鱼肉非常不新鲜，不推荐', '2020-11-7 13:14:07'),
     ('1445000', 'lonelyprince7', '土风土味', 1, 14.50, 3, '牛肉太少，蔬菜太多，希望下次多放点牛肉', '2020-10-13 20:29:13'),
