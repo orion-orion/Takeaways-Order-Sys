@@ -4,10 +4,18 @@
  * @Author: ZhangHongYu
  * @Date: 2020-11-02 10:47:01
  * @LastEditors: ZhangHongYu
- * @LastEditTime: 2020-11-07 20:15:40
+ * @LastEditTime: 2022-04-19 11:17:49
 -->
 # Takeaways-Order-Sys
 
+[![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/orion-orion/Takeaways-Order-Sys)
+13
+[![](https://img.shields.io/github/license/orion-orion/Takeaways-Order-Sys)](https://github.com/orion-orion/Takeaways-Order-Sys/LICENSE)
+14
+[![](https://img.shields.io/github/stars/orion-orion/Takeaways-Order-Sys?style=social)](https://github.com/orion-orion/Takeaways-Order-Sys)
+15
+
+​
 > 本项目为SWPU数据库原理及应用大作业，在线外卖订餐系统《西柚の外卖屋》， 基于[Flask](https://github.com/pallets/flask)框架+MySQL数据库开发，轻量简洁。
 
 #### 项目模块及功能介绍
@@ -78,9 +86,9 @@ mysql -uroot -p  < init.sql
 再执行Web服务启动程序
 ~~~python
 
-python app.py
+python app.py --mysql_pwd 11235813 --db_name appDB
 ~~~
-
+注意此处`mysql_pwd`是你的mysql的root用户登录密码，`db_name`即你用`init.sql`创建的数据库名称。
 #### 系统部分界面展示
 
 + 首页  

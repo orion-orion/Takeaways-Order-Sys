@@ -5,19 +5,21 @@ Version: 1.0
 Author: ZhangHongYu
 Date: 2020-11-02 09:24:31
 LastEditors: ZhangHongYu
-LastEditTime: 2020-11-07 17:43:59
+LastEditTime: 2022-04-19 11:10:22
 '''
 from flask import Flask, render_template, request, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 import pymysql
 import os
+import argparse
 import sys
 import importlib
 
 importlib.reload(sys)
 
 app = Flask(__name__)
-
+mysql_pwd = "11235813"
+db_name = "appDB"
 # 全局变量
 username = ""
 # TODO: username变量的赋值  方法1：全局变量实现，随登录进行修改  方法2：给每个页面传递username
@@ -55,7 +57,7 @@ def registerPage():
         print(userRole)
         print(username)
         # 连接数据库，默认数据库用户名root，密码空
-        db = pymysql.connect("localhost", "root", password="11235813", db="appDB",charset='utf8')
+        db = pymysql.connect(host="localhost", user="root", password=mysql_pwd, database=db_name,charset='utf8')
 
         if userRole == 'RESTAURANT':
             cursor = db.cursor()
@@ -135,7 +137,7 @@ def logInPage():
         print(userRole)
         print(username)
         # 连接数据库，默认数据库用户名root，密码空
-        db = pymysql.connect("localhost", "root", password="11235813", db="appDB", charset='utf8')
+        db =  pymysql.connect(host="localhost", user="root", password=mysql_pwd, database=db_name,charset='utf8')
 
         if userRole == 'ADMIN':
             cursor = db.cursor()
@@ -210,7 +212,7 @@ def adminRestListPage():
     if request.method == 'GET':
         msg = ""
         # 连接数据库，默认数据库用户名root，密码空
-        db = pymysql.connect("localhost", "root", password="11235813", db="appDB", charset='utf8')
+        db =  pymysql.connect(host="localhost", user="root", password=mysql_pwd, database=db_name,charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -234,7 +236,7 @@ def adminRestListPage():
     elif request.form["action"] == "移除":
         RESTName = request.form.get('RESTName')
         # 连接数据库，默认数据库用户名root，密码空
-        db = pymysql.connect("localhost", "root", password="11235813", db="appDB", charset='utf8')
+        db = pymysql.connect(host="localhost", user="root", password=mysql_pwd, database=db_name,charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -272,7 +274,7 @@ def adminCommentPage():
     if request.method == 'GET':
         msg = ""
         # 连接数据库，默认数据库用户名root，密码空
-        db = pymysql.connect("localhost", "root", password="11235813", db="appDB", charset='utf8')
+        db =  pymysql.connect(host="localhost", user="root", password=mysql_pwd, database=db_name,charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -294,7 +296,7 @@ def adminCommentPage():
             msg = "none"
             return render_template('adminCommentList.html', username=username, messages=msg)
     elif request.form["action"] == "按评分升序排列":
-        db = pymysql.connect("localhost", "root", password="11235813", db="appDB", charset='utf8')
+        db =  pymysql.connect(host="localhost", user="root", password=mysql_pwd, database=db_name,charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -322,7 +324,7 @@ def UserRestListPage():
     if request.method == 'GET':
         msg = ""
         # 连接数据库，默认数据库用户名root，密码空
-        db = pymysql.connect("localhost", "root", password="11235813", db="appDB", charset='utf8')
+        db =  pymysql.connect(host="localhost", user="root", password=mysql_pwd, database=db_name,charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -354,7 +356,7 @@ def menu():
         print(restaurant)
         msg = ""
         # 连接数据库，默认数据库用户名root，密码空
-        db = pymysql.connect("localhost", "root", password="11235813", db="appDB", charset='utf8')
+        db =  pymysql.connect(host="localhost", user="root", password=mysql_pwd, database=db_name,charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -376,7 +378,7 @@ def menu():
             msg = "none"
             return render_template('Menu.html', username=username, RESTAURANT=restaurant, messages=msg)
     elif request.form["action"] == "特色菜":
-        db = pymysql.connect("localhost", "root", password="11235813", db="appDB", charset='utf8')
+        db =  pymysql.connect(host="localhost", user="root", password=mysql_pwd, database=db_name,charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -397,7 +399,7 @@ def menu():
             msg = "none"
         return render_template('Menu.html', username=username, RESTAURANT=restaurant, messages=msg)
     elif request.form["action"] == "按销量排序":
-        db = pymysql.connect("localhost", "root", password="11235813", db="appDB", charset='utf8')
+        db =  pymysql.connect(host="localhost", user="root", password=mysql_pwd, database=db_name,charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -418,7 +420,7 @@ def menu():
             msg = "none"
         return render_template('Menu.html', username=username, RESTAURANT=restaurant, messages=msg)
     elif request.form["action"] == "按价格排序":
-        db = pymysql.connect("localhost", "root", password="11235813", db="appDB", charset='utf8')
+        db =  pymysql.connect(host="localhost", user="root", password=mysql_pwd, database=db_name,charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -449,7 +451,7 @@ def resComment():
         print(restaurant)
         msg = ""
         # 连接数据库，默认数据库用户名root，密码空
-        db = pymysql.connect("localhost", "root", password="11235813", db="appDB", charset='utf8')
+        db =  pymysql.connect(host="localhost", user="root", password=mysql_pwd, database=db_name,charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -478,7 +480,7 @@ def ResCommentList():
     # 连接数据库，默认数据库用户名root，密码空
     restaurant=username
     print(restaurant)
-    db = pymysql.connect("localhost", "root", password="11235813", db="appDB", charset='utf8')
+    db =  pymysql.connect(host="localhost", user="root", password=mysql_pwd, database=db_name,charset='utf8')
     cursor = db.cursor()
     try:
         cursor.execute("use appDB")
@@ -511,7 +513,7 @@ def page_not_found(error):
 def shoppingCartPage():
     if request.method == 'GET':
         print("myOrder-->GET")
-        db = pymysql.connect("localhost", "root", password="11235813", db="appDB", charset='utf8')
+        db =  pymysql.connect(host="localhost", user="root", password=mysql_pwd, database=db_name,charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -538,7 +540,7 @@ def shoppingCartPage():
         dishname = request.form['dishname']
         price = (float)(request.form['price'])
         img_res = request.form['img_res']
-        db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+        db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -561,7 +563,7 @@ def shoppingCartPage():
 
     elif request.form["action"] == "结算":
         print("结算啦")
-        db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+        db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -608,7 +610,7 @@ def ModifyPersonalInfo():
         address = request.form['address']
         phonenum = request.form['phonenum']
         # 连接数据库，默认数据库用户名root，密码空
-        db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+        db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -641,7 +643,7 @@ def ModifyPassword():
         # 两次输入密码是否相同
         if psw1 == psw2:
             # 连接数据库，默认数据库用户名root，密码空
-            db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+            db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
             cursor = db.cursor()
             try:
                 cursor.execute("use appDB")
@@ -670,7 +672,7 @@ def OrderPage():
     if request.method == 'GET':
         msg = ""
         # 连接数据库，默认数据库用户名root，密码空
-        db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+        db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -697,7 +699,7 @@ def OrderPage():
             msg = "none"
             return render_template('OrderPage.html', username=username, messages=msg)
     elif request.form["action"] == "按时间排序":
-        db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+        db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -719,7 +721,7 @@ def OrderPage():
             msg = "none"
         return render_template('OrderPage.html', username=username, messages=msg)
     elif request.form["action"] == "按价格排序":
-        db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+        db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -741,7 +743,7 @@ def OrderPage():
             msg = "none"
         return render_template('OrderPage.html', username=username, messages=msg, notFinishedNum=notFinishedNum)
     elif request.form["action"] == "未完成订单":
-        db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+        db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -763,7 +765,7 @@ def OrderPage():
             msg = "none"
         return render_template('OrderPage.html', username=username, messages=msg, notFinishedNum=notFinishedNum)
     elif request.form["action"] == "确认收货":
-        db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+        db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -804,7 +806,7 @@ def MyCommentsPage():
     if request.method == 'GET':
         msg = ""
         # 连接数据库，默认数据库用户名root，密码空
-        db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+        db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -831,7 +833,7 @@ def MyCommentsPage():
             msg = "none"
             return render_template('MyComments.html', username=username, messages=msg)
     elif request.form["action"] == "按时间排序":
-        db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+        db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -853,7 +855,7 @@ def MyCommentsPage():
             msg = "none"
         return render_template('MyComments.html', username=username, messages=msg)
     elif request.form["action"] == "按价格排序":
-        db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+        db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -876,7 +878,7 @@ def MyCommentsPage():
         return render_template('MyComments.html', username=username, messages=msg, notFinishedNum=notFinishedNum)
     elif request.form["action"] == "待评价订单":
         # 未评价订单跳转到写评论中
-        db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+        db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -908,7 +910,7 @@ def WriteCommentsPage():
     msg=""
     if request.method == 'GET':
         # 连接数据库，默认数据库用户名root，密码空
-        db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+        db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -935,7 +937,7 @@ def WriteCommentsPage():
             return render_template('WriteComments.html', username=username, messages=msg)
     elif request.form["action"] == "按交易时间排序":
         # TODO: 排序之后显示的是空的，不显示的问题没有解决
-        db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+        db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -956,7 +958,7 @@ def WriteCommentsPage():
             msg = "none"
         return render_template('WriteComments.html', username=username, messages=msg)
     elif request.form["action"] == "按价格排序":
-        db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+        db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -978,7 +980,7 @@ def WriteCommentsPage():
             msg = "none"
         return render_template('WriteComments.html', username=username, messages=msg, notFinishedNum=notFinishedNum)
     elif request.form["action"] == "未完成订单":
-        db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+        db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -1019,7 +1021,7 @@ def CommentFormPage():
         orderID = request.form.get('orderID')
         c_rank = request.form.get('rank')
         text = request.form.get('text')
-        db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+        db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -1045,7 +1047,7 @@ def MerchantMenu():
     if request.method == 'GET':
         msg = ""
         # 连接数据库，默认数据库用户名root，密码空
-        db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+        db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -1072,7 +1074,7 @@ def MerchantMenu():
             dishname = request.form.get('dishname')
             rest = request.form.get('restaurant')
             print(rest)
-            db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+            db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
             cursor = db.cursor()
             try:
                 cursor.execute("use appDB")
@@ -1091,7 +1093,7 @@ def MerchantMenu():
                 dmsg = "fail"
             return render_template('MerchantMenu.html', dishname=dishname, rest=rest, dmessages=dmsg)
         elif request.form["action"] == "按销量排序":
-            db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+            db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
             cursor = db.cursor()
             try:
                 cursor.execute("use appDB")
@@ -1112,7 +1114,7 @@ def MerchantMenu():
                 msg = "none"
             return render_template('MerchantMenu.html', username=username, messages=msg)
         elif request.form["action"] == "按价格排序":
-            db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+            db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
             cursor = db.cursor()
             try:
                 cursor.execute("use appDB")
@@ -1176,7 +1178,7 @@ def MenuModify():
 		
         print(isSpecialty)
         print(type(isSpecialty))
-        db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+        db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -1221,7 +1223,7 @@ def MenuAdd():
             filename = secure_filename(f.filename)
             f.save('static/images/' + filename)
         imgsrc = 'static/images/' + filename
-        db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+        db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
 
         cursor = db.cursor()
         try:
@@ -1291,7 +1293,7 @@ def MerchantModifyPerInfo():
 		
 		
         # 连接数据库，默认数据库用户名root，密码空
-        db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+        db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -1329,7 +1331,7 @@ def MerModifyPassword():
         # 两次输入密码是否相同
         if psw1 == psw2:
             # 连接数据库，默认数据库用户名root，密码空
-            db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+            db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
             cursor = db.cursor()
             try:
                 cursor.execute("use appDB")
@@ -1358,7 +1360,7 @@ def MerchantOrderPage():
     if request.method == 'GET':
         msg = ""
         # 连接数据库，默认数据库用户名root，密码空
-        db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+        db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -1385,7 +1387,7 @@ def MerchantOrderPage():
             msg = "none"
             return render_template('MerchantOrderPage.html', username=username, messages=msg)
     elif request.form["action"] == "按时间排序":
-        db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+        db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -1407,7 +1409,7 @@ def MerchantOrderPage():
             msg = "none"
         return render_template('MerchantOrderPage.html', username=username, messages=msg)
     elif request.form["action"] == "按价格排序":
-        db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+        db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -1429,7 +1431,7 @@ def MerchantOrderPage():
             msg = "none"
         return render_template('MerchantOrderPage.html', username=username, messages=msg, notFinishedNum=notFinishedNum)
     elif request.form["action"] == "未完成订单":
-        db = pymysql.connect("localhost", "root", password="11235813",db="appDB", charset='utf8')
+        db = pymysql.connect("localhost", "root", password=mysql_pwd,db=db_name, charset='utf8')
         cursor = db.cursor()
         try:
             cursor.execute("use appDB")
@@ -1454,5 +1456,32 @@ def MerchantOrderPage():
         return render_template('MerchantOrderPage.html', username=username, messages=msg)
 
 
+
+
+def parse_args():
+    """parse the command line args
+
+    Returns:
+        args: a namespace object including args
+    """
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        '--mysql_pwd',
+        help='the mysql root password',
+        default="11235813"
+    )
+    parser.add_argument(
+        '--db_name',
+        help='which database to use',
+        default="appDB"
+    )
+
+    args = parser.parse_args()
+    return args
+
+
 if __name__ == '__main__':
+    args = parse_args()
+    mysql_pwd = args.mysql_pwd
+    db_name = args.db_name
     app.run(host='localhost', port='9090')
